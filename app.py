@@ -66,15 +66,15 @@ def handle_message(event):
         nyanMessage = "数当てゲームを終了するニャン！"
         numberGameFlag = False
 
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TextSendMessage(text=nyanMessage)
-    # )
-
     line_bot_api.reply_message(
         event.reply_token,
-        [TextSendMessage(text=nyanMessage), TextSendMessage(text="あげあげニャン！")]
+        TextSendMessage(text=nyanMessage)
     )
+
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     [TextSendMessage(text=nyanMessage), TextSendMessage(text="あげあげニャン！")]
+    # )
 
 #数当てゲーム
 def numberGame(message):
