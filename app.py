@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import random
+from tenki import getTenki
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -53,7 +54,7 @@ def handle_message(event):
     if  numberGameFlag:
         nyanMessage = numberGame(message)
     else:
-        nyanMessage = message + "ニャー！"
+        nyanMessage = message + "ニャン！"
 
     if  message == "数当てゲーム":
         #数当てゲーム開始
@@ -65,6 +66,8 @@ def handle_message(event):
         #数当てゲーム終了
         nyanMessage = "数当てゲームを終了するニャン！"
         numberGameFlag = False
+    elif message == "天気":
+        nyanMessage = getTenki()
 
     line_bot_api.reply_message(
         event.reply_token,
