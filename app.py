@@ -53,7 +53,7 @@ def handle_message(event):
     if  numberGameFlag:
         nyanMessage = numberGame(message)
     else:
-        nyanMessage = message + "ニャン！"
+        nyanMessage = message + "ニャー！"
 
     if  message == "数当てゲーム":
         #数当てゲーム開始
