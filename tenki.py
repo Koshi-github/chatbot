@@ -1,10 +1,6 @@
 import requests
 import json
 
-# city_name = 'gifu'
-# api = 'http://api.openweathermap.org/data/2.5/weather?units=metric&q={city}&APPID={key}'
-# url = api.format(city = city_name, key = API_KEY)
-
 lat_posi = '35.7809'
 lon_posi = '137.054'
 part_day = 'hourly'
