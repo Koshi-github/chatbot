@@ -36,7 +36,7 @@ def getTenkiInfo():
     
     tenkiInfo = "岐阜県の現在の天気を教えるニャン" + "\n"
     tenkiInfo += "天気：" + judgeTenki(tenki) + "\n"
-    tenkiInfo += "気温：" + current_temp + "℃"
+    tenkiInfo += "気温：" + str(current_temp) + "℃"
     
     return tenkiInfo
 
