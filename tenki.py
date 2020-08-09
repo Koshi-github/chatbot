@@ -26,12 +26,17 @@ def judgeTenki(tenki):
     else:
         return '不明'
 
-def getTenki():
-
+def getTenkiInfo():
+    
     response = requests.get(url)
-
     data = response.json()
 
     tenki = data['current']['weather'][0]['main']
+    current_temp = data['current']['temp']
+    
+    tenkiInfo = "岐阜県の現在の天気を教えるニャン" + "\n"
+    tenkiInfo += "天気：" + judgeTenki(tenki) + "\n"
+    tenkiInfo += "気温：" + current_temp + "℃" + "\n"
+    
+    return tenkiInfo
 
-    return judgeTenki(tenki)
