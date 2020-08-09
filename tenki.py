@@ -32,6 +32,6 @@ def getTenki():
 
     data = response.json()
 
-    tenki = data['weather'][0]['main']
+    tenki = data[['current']'weather'][0]['main']
 
     return judgeTenki(tenki)
