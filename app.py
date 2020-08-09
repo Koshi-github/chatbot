@@ -66,7 +66,7 @@ def handle_message(event):
         #数当てゲーム終了
         nyanMessage = "数当てゲームを終了するニャン！"
         numberGameFlag = False
-    elif message == "天気":
+    elif "天気" in message:
         nyanMessage = "今の岐阜の天気は" + getTenki() + "ニャン!"
 
     line_bot_api.reply_message(
