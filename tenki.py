@@ -32,7 +32,7 @@ def getTenkiInfo():
     pop = '{:.0%}'.format(data['daily'][0]['pop'])
     
     tenkiInfo = "岐阜県の天気を教えるニャン" + '\n'
-    tenkiInfo += "天気：" + judgeTenki(tenki) + '\n'
+    tenkiInfo += "天候：" + judgeTenki(tenki) + '\n'
     tenkiInfo += "気温：" + str(current_temp) + "℃" + '\n'
     tenkiInfo += "降水確率：" + str(pop) + '\n'
     tenkiInfo += "今日も頑張ろうニャン！"
