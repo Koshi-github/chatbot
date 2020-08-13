@@ -1,7 +1,7 @@
 import requests
 import json
 
-lat_posi = '35.39111,'
+lat_posi = '35.39111'
 lon_posi = '136.72222'
 part_day = 'hourly'
 API_KEY = '1da5bd12bcc61752b8aab620df1fcec6'
