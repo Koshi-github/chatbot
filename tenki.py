@@ -42,3 +42,23 @@ def getTenkiInfo():
     tenkiInfo += "今日も頑張ろうニャン！"
     
     return tenkiInfo
+
+def getDayTenkiInfo(days):
+
+    response = requests.get(url)
+    data = response.json()
+
+    tenki = data['daily'][days]['weather'][0]['main']
+    day_temp = data['daily'][days]['temp']['day']
+    max_temp = data['daily'][days]['temp']['max']
+    min_temp = data['daily'][days]['temp']['min']
+    pop = '{:.0%}'.format(data['daily'][days]['pop'])
+    
+    tenkiInfo = "岐阜県の天気を教えるニャン" + '\n'
+    tenkiInfo += "天候：" + judgeTenki(tenki) + '\n'    
+    tenkiInfo += "気温：" + str(day_temp) + "℃" + '\n'
+    tenkiInfo += "最高気温" + str(max_temp) + "℃" + '\n'
+    tenkiInfo += "最低気温" + str(min_temp) + "℃" + '\n'
+    tenkiInfo += "降水確率：" + str(pop) + '\n'
+    
+    return tenkiInfo
