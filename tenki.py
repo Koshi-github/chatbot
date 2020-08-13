@@ -29,13 +29,16 @@ def getTenkiInfo():
 
     tenki = data['current']['weather'][0]['main']
     current_temp = data['current']['temp']
+    max_temp = data['daily'][0]['temp']['max']
+    min_temp = data['daily'][0]['temp']['min']
     pop = '{:.0%}'.format(data['daily'][0]['pop'])
     
-    tenkiInfo = "岐阜県の天気を教えるニャン" + '\n'
+    tenkiInfo = "現在の岐阜県の天気を教えるニャン" + '\n'
     tenkiInfo += "天候：" + judgeTenki(tenki) + '\n'
     tenkiInfo += "気温：" + str(current_temp) + "℃" + '\n'
+    tenkiInfo += "最高気温" + str(max_temp) + "℃" + '\n'
+    tenkiInfo += "最低気温" + str(min_temp) + "℃" + '\n'
     tenkiInfo += "降水確率：" + str(pop) + '\n'
     tenkiInfo += "今日も頑張ろうニャン！"
     
     return tenkiInfo
-
