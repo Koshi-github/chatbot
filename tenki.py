@@ -59,6 +59,6 @@ def getDayTenkiInfo(days):
     tenkiInfo += "気温：" + str(day_temp) + "℃" + '\n'
     tenkiInfo += "最高気温" + str(max_temp) + "℃" + '\n'
     tenkiInfo += "最低気温" + str(min_temp) + "℃" + '\n'
-    tenkiInfo += "降水確率：" + str(pop) + '\n'
+    tenkiInfo += "降水確率：" + str(pop)
     
     return tenkiInfo
