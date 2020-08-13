@@ -1,8 +1,8 @@
 import requests
 import json
 
-lat_posi = '35.7809'
-lon_posi = '137.054'
+lat_posi = '35.39111,'
+lon_posi = '136.72222'
 part_day = 'hourly'
 API_KEY = '1da5bd12bcc61752b8aab620df1fcec6'
 api = api = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={key}&units=metric'
