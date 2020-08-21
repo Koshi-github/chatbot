@@ -56,7 +56,7 @@ def handle_message(event):
     if  numberGameFlag:
         nyanMessage = numberGame(message)
     else:
-        nyanMessage = message + "ニャン！"
+        nyanMessage = message + "ニャン！" + line_bot_api.get_profile(user_id)
 
     if  message == "数当てゲーム":
         #数当てゲーム開始
