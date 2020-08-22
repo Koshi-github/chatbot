@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 import random
 from tenki import getTenkiInfo
 from tenki import getDayTenkiInfo
-import syokuzai
+from syokuzai import SpreadSheet
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -53,7 +53,11 @@ def handle_message(event):
     nyanMessage = ""
 
     if  syokuzaiModeFlag:
-        nyanMessage = "これが材料ニャン！"
+        sp = SpreadSheet()
+        sp.__init__()
+        ryoriName = sp.Read(1,1)
+        nyanMessage = "これが" + ryoriName + "の材料ニャン！"
+
         syokuzaiModeFlag = False
     else:
         profile = line_bot_api.get_profile(event.source.user_id)
