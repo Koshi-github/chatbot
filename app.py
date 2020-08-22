@@ -67,11 +67,14 @@ def handle_message(event):
                 event.reply_token,
                 [TextSendMessage(text=nyanMessage), TextSendMessage(text=nyanMessage2)]
             )
+
+            syokuzaiModeFlag = False
+            
             return
 
         else:
             nyanMessage = "その料理は材料が登録されてないニャン（泣）"
-        syokuzaiModeFlag = False
+            syokuzaiModeFlag = False
     else:
         profile = line_bot_api.get_profile(event.source.user_id)
         nyanMessage = message + "ニャン！" + profile.user_id
