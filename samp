@@ -1,0 +1,56 @@
+import gspread
+import json
+import ConstList
+#ServiceAccountCredentials：Googleの各サービスへアクセスできるservice変数を生成します。
+from oauth2client.service_account import ServiceAccountCredentials
+
+SCOPE = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+KEY_FILE = 'gspread-sample-285413-57dacd9055f0.json'
+SPREAD_SHEET_KEY = '1IlWR2fbwiV_FuW3F15_CwecNWDw8r1Vxg7M8k9hyt14'
+
+ColumnNameList =['日付','営業日','出社時間:時','出社時間:分',
+                '退社時間:時','退社時間:分','普通休憩:時',
+                '普通休憩:分','深夜休憩:時','深夜休憩:分']
+
+class SpreadSheet:
+    def __init__(self):
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(KEY_FILE, SCOPE)
+        gc = gspread.authorize(credentials)
+        self.WorkBook = gc.open_by_key(SPREAD_SHEET_KEY)
+
+        self.SheetUpdate()
+        self.CreateColumnName()
+    
+    def CreateColumnName(self):
+        if(self.Read(ConstList.COLUMN_NAME_ROW_NUM,ConstList.WORK_DAY_COLUMN) != '日付'):
+            for count, columnName in enumerate(ColumnNameList, 1):
+                self.Write(1,count,columnName)
+
+    def SheetUpdate(self):
+        self.WorkSheet = self.WorkBook.sheet1
+
+    def Read(self,row,colm):
+        val = self.WorkSheet.cell(row,colm).value
+        return val
+
+    def Write(self,row,colm,val):
+        self.WorkSheet.update_cell(row,colm,val)
+        self.SheetUpdate()
+    
+    def GetDayRow(self,day):
+        row = 1
+        while(True):
+            val = self.Read(row,1)
+            if(val == day): 
+                return row
+            if(val == ""): 
+                return 0
+            row = row + 1
+    
+    def GetDataBottomRow(self):
+        row = 1
+        while(True):
+            val = self.Read(row,1)
+            if(val == ""): 
+                return row
+            row = row + 1

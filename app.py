@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 import random
 from tenki import getTenkiInfo
 from tenki import getDayTenkiInfo
+import syokuzai
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -25,7 +26,7 @@ def test():
 line_bot_api = LineBotApi('1Z6hiCqj7SGQgZgF60g8tTqB4LYviStIMtQU+wfQ/obac5jO/A3uuy1hVDQhrMPeG5Tg12jKgwPeiLgA3CEbPoP5LMcgxsJgcn7bT2frm0du/FFeK+7szo8Kizl79ZN241wqxbZwCb/1deviAZcOGQdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('6c0190b40864600e8ff8373d49471efa')
 
-numberGameFlag = False  #数当てゲームフラグ
+syokuzaiModeFlag = False  #数当てゲームフラグ
 target = 0  #ターゲット
 
 @app.route("/callback", methods=['POST'])
@@ -50,25 +51,19 @@ def callback():
 def handle_message(event):
 
     message = event.message.text
-    global numberGameFlag
+    global syokuzaiModeFlag
     nyanMessage = ""
 
-    if  numberGameFlag:
-        nyanMessage = numberGame(message)
+    if  syokuzaiModeFlag:
+        nyanMessage = "これが材料ニャン！"
+        syokuzaiModeFlag = False
     else:
         profile = line_bot_api.get_profile(event.source.user_id)
         nyanMessage = message + "ニャン！" + profile.user_id
 
-    if  message == "数当てゲーム":
-        #数当てゲーム開始
-        nyanMessage = "数当てゲーム開始だニャン！\n僕が考えた数を当てるニャンよ！"
-        global target
-        target = random.randrange(100)
-        numberGameFlag = True
-    elif message == "やめる":
-        #数当てゲーム終了
-        nyanMessage = "数当てゲームを終了するニャン！"
-        numberGameFlag = False
+    if "食材教えて" in message:
+        syokuzaiModeFlag = True
+        nyanMessage = "何の食材が知りたいニャン？"
     elif "天気" in message and "今日" in message:
         nyanMessage = "今日の" + getDayTenkiInfo(0)
     elif "天気" in message and "明日" in message:
@@ -87,26 +82,6 @@ def handle_message(event):
     #     event.reply_token,
     #     [TextSendMessage(text=nyanMessage), TextSendMessage(text="あげあげニャン！")]
     # )
-
-#数当てゲーム
-def numberGame(message):
-
-    if not message.isdigit():
-        return "数字を入力してニャン！"
-
-    global target
-    number = int(message)
-
-    if target == number:
-        nyankoMessege = "正解だニャン！"
-        global numberGameFlag
-        numberGameFlag = False
-    elif target < number:
-        nyankoMessege = "もっと低い数字だニャン！"
-    else:
-        nyankoMessege = "もっと大きい数字だニャン！"
-    
-    return nyankoMessege
 
 if __name__ == "__main__":
     app.run()
