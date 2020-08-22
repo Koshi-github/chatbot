@@ -56,8 +56,11 @@ def handle_message(event):
         sp = SpreadSheet()
         sp.__init__()
         targetRow = sp.GetDayRow(message)
-        ryoriName = sp.Read(targetRow,1)
-        nyanMessage = "これが" + ryoriName + "の材料ニャン！"
+        if targetRow > 0:
+            ryoriName = sp.Read(targetRow,1)
+            nyanMessage = "これが" + ryoriName + "の材料ニャン！"
+        else:
+            "その料理は材料が登録されてないニャン（泣）"
 
         syokuzaiModeFlag = False
     else:
