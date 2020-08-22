@@ -87,6 +87,7 @@ def handle_message(event):
             syokuzaiModeFlag = False
             
     elif kurashiruModeFlag:
+        print('入ったよ！')
         sendMessage(event, MessageCreate(message))
         kurashiruModeFlag = False
         return
