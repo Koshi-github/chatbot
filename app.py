@@ -61,7 +61,6 @@ def handle_message(event):
             nyanMessage = "これが" + ryoriName + "の材料ニャン！"
         else:
             nyanMessage = "その料理は材料が登録されてないニャン（泣）"
-
         syokuzaiModeFlag = False
     else:
         profile = line_bot_api.get_profile(event.source.user_id)
