@@ -36,11 +36,11 @@ class SpreadSheet:
                 return 0
             row = row + 1
     
-    def GetDataColumn(self):
-        column = 1
+    def GetDataColumn(self,row):
+        column = 2
         syokuzaiList = []
         while(True):
-            val = self.Read(1, column)
+            val = self.Read(2, column)
             if(val == ""): 
                 return '\n'.join(syokuzaiList)
             else:
