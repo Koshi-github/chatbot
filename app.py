@@ -55,10 +55,13 @@ def handle_message(event):
     if  syokuzaiModeFlag:
         sp = SpreadSheet()
         sp.__init__()
-        targetRow = sp.GetDayRow(message)
+        targetRow = sp.GetDataRow(message)
         if targetRow > 0:
+            #料理名の取得
             ryoriName = sp.Read(targetRow,1)
-            nyanMessage = "これが" + ryoriName + "の材料ニャン！"
+
+            nyanMessage = "これが" + ryoriName + "の材料ニャン！\n"
+            nyanMessage = nyanMessage + sp.GetDataColumn()
         else:
             nyanMessage = "その料理は材料が登録されてないニャン（泣）"
         syokuzaiModeFlag = False

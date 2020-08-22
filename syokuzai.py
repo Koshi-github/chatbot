@@ -26,7 +26,7 @@ class SpreadSheet:
         self.WorkSheet.update_cell(row,colm,val)
         self.SheetUpdate()
     
-    def GetDayRow(self,ryoriName):
+    def GetDataRow(self,ryoriName):
         row = 1
         while(True):
             val = self.Read(row,1)
@@ -36,6 +36,17 @@ class SpreadSheet:
                 return 0
             row = row + 1
     
+    def GetDataColumn(self):
+        column = 1
+        syokuzaiList = []
+        while(True):
+            val = self.Read(1, column)
+            if(val == ""): 
+                return '\n'.join(syokuzaiList)
+            else:
+                syokuzaiList.__add__(val)
+            column = column + 1
+    
     def GetDataBottomRow(self):
         row = 1
         while(True):
@@ -43,3 +54,11 @@ class SpreadSheet:
             if(val == ""): 
                 return row
             row = row + 1
+    
+    def GetDataLastColumn(self):
+        column = 1
+        while(True):
+            val = self.Read(1, column)
+            if(val == ""): 
+                return column
+            column = column + 1
