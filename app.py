@@ -3,6 +3,7 @@ import random
 from tenki import getTenkiInfo
 from tenki import getDayTenkiInfo
 from syokuzai import SpreadSheet
+from kurashiru import MessageCreate
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -26,6 +27,7 @@ line_bot_api = LineBotApi('1Z6hiCqj7SGQgZgF60g8tTqB4LYviStIMtQU+wfQ/obac5jO/A3uu
 handler = WebhookHandler('6c0190b40864600e8ff8373d49471efa')
 
 syokuzaiModeFlag = False  #食材モードフラグ
+kurashiruModeFlag = False #クラシルモードフラグ
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -45,11 +47,21 @@ def callback():
 
     return 'OK'
 
+def sendMessage(event,messages):
+        messageList = []
+
+        for message in messages:
+            messageList.append(TextSendMessage(text=message))
+
+        line_bot_api.reply_message(event.reply_token,messageList)
+        return
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
     message = event.message.text
     global syokuzaiModeFlag
+    global kurashiruModeFlag
     nyanMessage = ""
 
     if  syokuzaiModeFlag:
@@ -57,10 +69,8 @@ def handle_message(event):
         sp.__init__()
         targetRow = sp.GetDataRow(message)
         if targetRow > 0:
-            #料理名の取得
             ryoriName = sp.Read(targetRow,1)
-
-            nyanMessage = "これが" + ryoriName + "の材料ニャン！\n"
+            nyanMessage = "これが" + ryoriName + "の材料ニャン！"
             nyanMessage2 = sp.GetDataColumn(targetRow)
 
             line_bot_api.reply_message(
@@ -69,19 +79,27 @@ def handle_message(event):
             )
 
             syokuzaiModeFlag = False
-            
+
             return
 
         else:
             nyanMessage = "その料理は材料が登録されてないニャン（泣）"
             syokuzaiModeFlag = False
+            
+    elif kurashiruModeFlag:
+        sendMessage(MessageCreate(message))
+        kurashiruModeFlag = False
+        return
     else:
-        profile = line_bot_api.get_profile(event.source.user_id)
-        nyanMessage = message + "ニャン！" + profile.user_id
+        #profile = line_bot_api.get_profile(event.source.user_id)
+        nyanMessage = message + "ニャン！"
 
     if "食材教えて" in message:
         syokuzaiModeFlag = True
         nyanMessage = "何の食材が知りたいニャン？"
+    elif "クラシルで検索" in message:
+        kurashiruModeFlag = True
+        yanMessage = "何のレシピが知りたいニャン？"
     elif "天気" in message and "今日" in message:
         nyanMessage = "今日の" + getDayTenkiInfo(0)
     elif "天気" in message and "明日" in message:
