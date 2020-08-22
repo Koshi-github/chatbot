@@ -25,3 +25,21 @@ class SpreadSheet:
     def Write(self,row,colm,val):
         self.WorkSheet.update_cell(row,colm,val)
         self.SheetUpdate()
+    
+    def GetDayRow(self,ryoriName):
+        row = 1
+        while(True):
+            val = self.Read(row,1)
+            if(val == ryoriName): 
+                return row
+            if(val == ""): 
+                return 0
+            row = row + 1
+    
+    def GetDataBottomRow(self):
+        row = 1
+        while(True):
+            val = self.Read(row,1)
+            if(val == ""): 
+                return row
+            row = row + 1
