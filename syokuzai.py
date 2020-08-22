@@ -40,7 +40,7 @@ class SpreadSheet:
         column = 2
         syokuzaiList = []
         while(True):
-            val = self.Read(2, column)
+            val = self.Read(row, column)
             if(val == ""): 
                 return '\n'.join(syokuzaiList)
             else:
