@@ -42,7 +42,9 @@ class SpreadSheet:
         while(True):
             val = self.Read(1, column)
             if(val == ""): 
-                return '\n'.join(syokuzaiList)
+                stZairyou = '\n'.join(syokuzaiList)
+                print(stZairyou)
+                return stZairyou
             else:
                 syokuzaiList.__add__(val)
             column = column + 1
