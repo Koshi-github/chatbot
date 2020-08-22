@@ -25,8 +25,7 @@ def test():
 line_bot_api = LineBotApi('1Z6hiCqj7SGQgZgF60g8tTqB4LYviStIMtQU+wfQ/obac5jO/A3uuy1hVDQhrMPeG5Tg12jKgwPeiLgA3CEbPoP5LMcgxsJgcn7bT2frm0du/FFeK+7szo8Kizl79ZN241wqxbZwCb/1deviAZcOGQdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('6c0190b40864600e8ff8373d49471efa')
 
-syokuzaiModeFlag = False  #数当てゲームフラグ
-target = 0  #ターゲット
+syokuzaiModeFlag = False  #食材モードフラグ
 
 @app.route("/callback", methods=['POST'])
 def callback():
