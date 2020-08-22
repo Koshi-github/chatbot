@@ -30,7 +30,7 @@ class SpreadSheet:
         row = 1
         while(True):
             val = self.Read(row,1)
-            if(val in ryoriName): 
+            if(val == ryoriName): 
                 return row
             if(val == ""): 
                 return 0
