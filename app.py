@@ -61,8 +61,8 @@ def handle_message(event):
             ryoriName = sp.Read(targetRow,1)
 
             nyanMessage = "これが" + ryoriName + "の材料ニャン！\n"
-            print(sp.GetDataColumn)
-            nyanMessage = nyanMessage + sp.GetDataColumn()
+            #print(sp.GetDataColumn)
+            #nyanMessage = nyanMessage + sp.GetDataColumn()
         else:
             nyanMessage = "その料理は材料が登録されてないニャン（泣）"
         syokuzaiModeFlag = False
