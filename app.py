@@ -87,7 +87,7 @@ def handle_message(event):
             syokuzaiModeFlag = False
             
     elif kurashiruModeFlag:
-        sendMessage(MessageCreate(message))
+        sendMessage(event, MessageCreate(message))
         kurashiruModeFlag = False
         return
     else:
