@@ -99,7 +99,7 @@ def handle_message(event):
         nyanMessage = "何の食材が知りたいニャン？"
     elif "クラシルで検索" in message:
         kurashiruModeFlag = True
-        yanMessage = "何のレシピが知りたいニャン？"
+        nyanMessage = "何のレシピが知りたいニャン？"
     elif "天気" in message and "今日" in message:
         nyanMessage = "今日の" + getDayTenkiInfo(0)
     elif "天気" in message and "明日" in message:
