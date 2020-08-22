@@ -42,11 +42,9 @@ class SpreadSheet:
         while(True):
             val = self.Read(1, column)
             if(val == ""): 
-                stZairyou = '\n'.join(syokuzaiList)
-                print(stZairyou)
-                return stZairyou
+                return '\n'.join(syokuzaiList)
             else:
-                syokuzaiList.__add__(val)
+                syokuzaiList.append(val)
             column = column + 1
     
     def GetDataBottomRow(self):
