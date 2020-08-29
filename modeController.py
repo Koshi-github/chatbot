@@ -12,7 +12,7 @@ class ModeController:
         targetRow = self.sp.GetDataRow(self.userID)
         if targetRow > 0:
             mode = self.sp.Read(targetRow,2)
-            return commonEnum.Mode(mode)
+            return commonEnum.Mode(int(mode))
         else:
             newRow = self.sp.GetDataBottomRow()
             self.sp.Write(newRow,1,self.userID)
