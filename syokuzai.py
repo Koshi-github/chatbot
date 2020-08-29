@@ -1,64 +1,30 @@
-import gspread
-import json
-#ServiceAccountCredentials：Googleの各サービスへアクセスできるservice変数を生成します。
-from oauth2client.service_account import ServiceAccountCredentials
+from spreadSheetControler import SpreadSheet
 
-SCOPE = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-KEY_FILE = 'gspread-test-285207-d7f0e41d76af.json'
-SPREAD_SHEET_KEY = '105mTAD0oza2j12_4ZySeXMoBrPOLw3scdG5unXVmgm8'
+WORK_SHEET_NAME = "sheet1"
 
-class SpreadSheet:
-    def __init__(self):
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(KEY_FILE, SCOPE)
-        gc = gspread.authorize(credentials)
-        self.WorkBook = gc.open_by_key(SPREAD_SHEET_KEY)
+class Syokuzai:
+    def createMessage(self, message):
+        returnList =[]
 
-        self.SheetUpdate()
+        sp = SpreadSheet(WORK_SHEET_NAME)
+        targetRow = sp.GetDataRow(message)
+        if targetRow > 0:
+            ryoriName = sp.Read(targetRow,1)
+            returnList.append("これが" + ryoriName + "の材料ニャン！")
+            returnList.append(self.GetDataColumn(sp,targetRow))
 
-    def SheetUpdate(self):
-        self.WorkSheet = self.WorkBook.sheet1
+        else:
+            returnList.append("その料理は材料が登録されてないニャン（泣）")
 
-    def Read(self,row,colm):
-        val = self.WorkSheet.cell(row,colm).value
-        return val
+        return returnList
 
-    def Write(self,row,colm,val):
-        self.WorkSheet.update_cell(row,colm,val)
-        self.SheetUpdate()
-    
-    def GetDataRow(self,ryoriName):
-        row = 1
-        while(True):
-            val = self.Read(row,1)
-            if(val == ryoriName): 
-                return row
-            if(val == ""): 
-                return 0
-            row = row + 1
-    
-    def GetDataColumn(self,row):
+    def GetDataColumn(self,sp,row):
         column = 2
         syokuzaiList = []
         while(True):
-            val = self.Read(row, column)
+            val = sp.Read(row, column)
             if(val == ""): 
                 return '\n'.join(syokuzaiList)
             else:
                 syokuzaiList.append(val)
-            column = column + 1
-    
-    def GetDataBottomRow(self):
-        row = 1
-        while(True):
-            val = self.Read(row,1)
-            if(val == ""): 
-                return row
-            row = row + 1
-    
-    def GetDataLastColumn(self):
-        column = 1
-        while(True):
-            val = self.Read(1, column)
-            if(val == ""): 
-                return column
             column = column + 1
