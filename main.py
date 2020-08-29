@@ -41,4 +41,5 @@ def execute(message, userID):
         return returnMessage
     
     except Exception as e:
-        return str(e)
+        returnM = []
+        return returnM.append(str(e))
