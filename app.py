@@ -43,7 +43,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    returnMessage = main.execute(event.message.text, line_bot_api.get_profile(event.source.user_id))
+    returnMessage = main.execute(event.message.text, str(line_bot_api.get_profile(event.source.user_id).user_id))
     sendMessage(event,returnMessage)
 
 if __name__ == "__main__":
