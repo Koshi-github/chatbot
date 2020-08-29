@@ -1,6 +1,6 @@
-from spreadSheetControler import SpreadSheet
+from spreadSheetController import SpreadSheet
 
-WORK_SHEET_NAME = "sheet1"
+WORK_SHEET_NAME = "一覧"
 
 class Syokuzai:
     def createMessage(self, message):
