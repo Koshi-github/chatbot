@@ -1,7 +1,7 @@
 from spreadSheetController import SpreadSheet
 import commonEnum
 
-WORK_SHEET_NAME = "UserID"
+WORK_SHEET_NAME = "ユーザ情報"
 
 class ModeController:
     def __init__(self,userID):

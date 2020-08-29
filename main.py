@@ -21,8 +21,6 @@ def execute(message, userID):
             returnMessage.append("何の料理を検索するニャン？")
             return returnMessage
 
-    
-
         if ("天気" in message):
             tenki = Tenki()
             returnMessage = tenki.createMessage(message)
@@ -30,14 +28,17 @@ def execute(message, userID):
         elif (mode == commonEnum.Mode.SYOKUZAI):
             syokuzai = Syokuzai()
             returnMessage = syokuzai.createMessage(message)
+            modeController.setMode(commonEnum.Mode.NORMAL)
 
         elif (mode == commonEnum.Mode.KURASHIRU):
             kurashiru = Kurashiru()
             returnMessage = kurashiru.createMessage(message)
+            modeController.setMode(commonEnum.Mode.NORMAL)
 
         else:
             returnMessage.append(message)
         
+
         return returnMessage
     
     except Exception as e:
