@@ -6,19 +6,24 @@ def execute(message, userID):
     mode = 2
     returnMessage = []
 
-    if (mode == 1):
-        s = Syokuzai()
-        returnMessage = s.createMessage(message)
+    try:
 
-    elif (mode == 2):
-        k = Kurashiru()
-        returnMessage = k.createMessage(message)
+        if ("天気" in message):
+            t = Tenki()
+            returnMessage = t.createMessage(message)
 
-    elif ("天気" in message):
-        t = Tenki()
-        returnMessage = t.createMessage(message)
+        elif (mode == 1):
+            s = Syokuzai()
+            returnMessage = s.createMessage(message)
 
-    else:
-        returnMessage.append(message)
+        elif (mode == 2):
+            k = Kurashiru()
+            returnMessage = k.createMessage(message)
 
-    return returnMessage
+        else:
+            returnMessage.append(message)
+        
+        return returnMessage
+    
+    except Exception as e:
+        return str(e)
